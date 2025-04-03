@@ -2,8 +2,6 @@ from langchain import PromptTemplate, LLMChain
 from langchain.llms import OpenAI
 import openai
 
-from src.image_preprocessor import ImagePreprocessor
-
 
 class HealthAssistant:
     def __init__(self, openai_api_key: str):
