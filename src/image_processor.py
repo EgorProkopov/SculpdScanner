@@ -4,12 +4,12 @@ import cv2
 import base64
 import albumentations as A
 
-from omegaconf import OmegaConf
+from omegaconf import OmegaConf, DictConfig
 from PIL import Image
 
 
 class ImageProcessor:
-    def __init__(self, image_processing_config):
+    def __init__(self, image_processing_config: DictConfig):
         self.image_processing_config = image_processing_config
 
         image_width = self.image_processing_config["image_width"]
@@ -21,12 +21,12 @@ class ImageProcessor:
             A.CLAHE(clip_limit=clip_limit, tile_grid_size=(tile_grid_size, tile_grid_size))
         ])
 
-    def process_image(self, image_path):
+    def process_image(self, image):
         transformed_image = self.transform_image(image)
         image_base64 = self.get_image_base64(transformed_image)
         return image_base64
 
-    def read_image(self, image_path):
+    def read_image(self, image_path: str):
         image = cv2.imread(image_path)
         if image is None:
             raise ValueError("Image not found or unable to read from path: " + image_path)
@@ -52,7 +52,6 @@ class ImageProcessor:
 
 
 if __name__ == "__main__":
-
 
     image_processing_config = OmegaConf.load(config_path)["image_processing"]
     image_processor = ImageProcessor(image_processing_config)

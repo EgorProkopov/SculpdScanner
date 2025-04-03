@@ -3,7 +3,7 @@ from langchain.llms import OpenAI
 import openai
 
 
-class HealthAssistant:
+class HealthExpert:
     def __init__(self, openai_api_key: str):
         self.openai_api_key = openai_api_key
         self.llm = OpenAI(temperature=0.7, openai_api_key=openai_api_key)
@@ -27,7 +27,7 @@ class HealthAssistant:
 
 if __name__ == "__main__":
     OPENAI_API_KEY = ""
-    assistant = HealthAssistant(openai_api_key=OPENAI_API_KEY)
+    assistant = HealthExpert(openai_api_key=OPENAI_API_KEY)
 
     image_path = ""
     report = assistant.generate_health_report(image_path)

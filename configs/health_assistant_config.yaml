@@ -3,3 +3,6 @@ image_processing:
   image_height: 512
   clip_limit: 2.0
   tile_grid_size: 8
+
+health_scanner:
+  scanner_prompt: "empty prompt"
