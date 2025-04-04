@@ -1,49 +1,52 @@
-import openai
+import os
+import dotenv
+
 from omegaconf import OmegaConf, DictConfig
-from langchain.agents import initialize_agent, Tool
-from langchain_openai import OpenAI
-from langchain.prompts import PromptTemplate
+from openai import OpenAI
 
 from src.image_processor import ImageProcessor
 
 
 class HealthScanner:
-    def __init__(self, openai_api_key, scanner_config: DictConfig, image_processor: ImageProcessor):
+    def __init__(self, API_KEY, scanner_config: DictConfig, image_processor: ImageProcessor):
         self.scanner_config = scanner_config
         self.image_processor = image_processor
 
-        self.llm = OpenAI(openai_api_key=openai_api_key, temperature=0)
-        self.image_analysis_tool = Tool(
-            name="HealthScanner",
-            func=self.get_image_description,
-            description="User health analysis tool by photo"
-        )
-        self.agent = initialize_agent([self.image_analysis_tool], self.llm, agent_type="zero-shot-react-description", verbose=True)
+        self.llm = OpenAI(api_key=API_KEY)
 
     def get_image_description(self, image_path: str) -> str:
         image = self.image_processor.read_image(image_path)
         image_base64 = self.image_processor.process_image(image)
 
         prompt = self.scanner_config["scanner_prompt"]
-        response = openai.Image.create(
-            prompt=prompt,
-            image=image_base64,
-            n=1
+        model = self.scanner_config["model"]
+        response = self.llm.responses.create(
+            model=model,
+            input=[
+                {
+                    "role": "user",
+                    "content": [
+                        {"type": "input_text", "text": prompt},
+                        {"type": "input_image", "image_url": f"data:image/jpeg;base64,{image_base64}"}
+                    ]
+                }
+            ]
         )
 
-        image_description = response['data'][0]['text']
-        return image_description
-
-    def run_agent(self, image_path: str) -> str:
-        result = self.agent.invoke(image_path)
-        return result
+        return response.output_text
 
 
 if __name__ == "__main__":
+    dotenv.load_dotenv()
 
-    config = OmegaConf.load(config_path)
+    image_path = r""
+
+    CONFIG_PATH = os.getenv("CONFIG_PATH")
+    API_KEY = os.getenv("API_KEY")
+
+    config = OmegaConf.load(CONFIG_PATH)
     image_processor = ImageProcessor(config["image_processing"])
-    health_scanner = HealthScanner(openai_api_key, config["health_scanner"], image_processor)
+    health_scanner = HealthScanner(API_KEY, config["health_scanner"], image_processor)
 
-    print(health_scanner.run_agent(image_path))
+    print(health_scanner.get_image_description(image_path))
 

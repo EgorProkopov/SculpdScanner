@@ -1,4 +1,5 @@
 import io
+import os
 
 import cv2
 import base64
@@ -52,8 +53,10 @@ class ImageProcessor:
 
 
 if __name__ == "__main__":
+    image_path = r""
+    CONFIG_PATH = os.getenv("CONFIG_PATH")
 
-    image_processing_config = OmegaConf.load(config_path)["image_processing"]
+    image_processing_config = OmegaConf.load(CONFIG_PATH)["image_processing"]
     image_processor = ImageProcessor(image_processing_config)
 
     image = image_processor.read_image(image_path)
