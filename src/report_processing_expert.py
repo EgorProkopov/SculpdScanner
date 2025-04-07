@@ -46,7 +46,7 @@ class ReportProcessingExpert:
 
 if __name__ == "__main__":
     dotenv.load_dotenv()
-    report_path = r""
+    report_path = r"F:\SCULPD\SculpdScanner\data\test_images\scanner_outputs\normal_25-29_percents_report.txt"
 
     REPORT_PROCESSING_CONFIG_PATH = os.getenv("REPORT_PROCESSING_CONFIG_PATH")
     API_KEY = os.getenv("API_KEY")

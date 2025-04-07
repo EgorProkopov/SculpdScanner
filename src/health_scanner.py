@@ -39,12 +39,12 @@ class HealthScanner:
 if __name__ == "__main__":
     dotenv.load_dotenv()
 
-    image_path = r""
+    image_path = r"F:\SCULPD\SculpdScanner\data\test_images\normal_images\20-24_percents.jpg"
 
-    CONFIG_PATH = os.getenv("CONFIG_PATH")
+    SCANNER_CONFIG_PATH = os.getenv("SCANNER_CONFIG_PATH")
     API_KEY = os.getenv("API_KEY")
 
-    config = OmegaConf.load(CONFIG_PATH)
+    config = OmegaConf.load(SCANNER_CONFIG_PATH)
     image_processor = ImageProcessor(config["image_processing"])
     health_scanner = HealthScanner(API_KEY, config["health_scanner"], image_processor)
 
