@@ -1,5 +1,6 @@
 import io
 import os
+import dotenv
 
 import cv2
 import base64
@@ -13,13 +14,13 @@ class ImageProcessor:
     def __init__(self, image_processing_config: DictConfig):
         self.image_processing_config = image_processing_config
 
-        image_width = self.image_processing_config["image_width"]
-        image_height = self.image_processing_config["image_height"]
         clip_limit = self.image_processing_config["clip_limit"]
         tile_grid_size = self.image_processing_config["tile_grid_size"]
+        gaussian_blur_limit = self.image_processing_config["gaussian_blur_limit"]
+
         self.transform = A.Compose([
-            A.Resize(image_width, image_height),
-            A.CLAHE(clip_limit=clip_limit, tile_grid_size=(tile_grid_size, tile_grid_size))
+            A.CLAHE(clip_limit=clip_limit, tile_grid_size=(tile_grid_size, tile_grid_size)),
+            A.GaussianBlur(blur_limit=(gaussian_blur_limit, gaussian_blur_limit))
         ])
 
     def process_image(self, image):
@@ -35,9 +36,36 @@ class ImageProcessor:
         image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
         return image
 
+    def resize_image(self, image):
+        config_image_width = self.image_processing_config["image_width"]
+        config_image_height = self.image_processing_config["image_height"]
+
+        save_aspect_ratio = self.image_processing_config["save_aspect_ratio"]
+        do_not_resize_smaller_images = self.image_processing_config["do_not_resize_smaller_image"]
+
+        # Check smaller image
+        if do_not_resize_smaller_images:
+            image_width = image.shape[1]
+            if image_width < config_image_width:
+                return image
+
+        # Resize with respect to width-height ratio
+        if save_aspect_ratio:
+            image_width = image.shape[1]
+            image_height = image.shape[0]
+            new_image_height = int(image_height / image_width * config_image_width)
+            resize_transform = A.Resize(new_image_height, config_image_width)
+            resized_image = resize_transform(image=image)['image']
+        else:
+            resize_transform = A.Resize(config_image_height, config_image_width)
+            resized_image = resize_transform(image=image)['image']
+
+        return resized_image
+
     def transform_image(self, image):
-        transformed = self.transform(image=image)
-        return transformed['image']
+        resized_image = self.resize_image(image)
+        transformed_image = self.transform(image=resized_image)['image']
+        return transformed_image
 
     def show_image(self, image):
         image = cv2.cvtColor(image, cv2.COLOR_RGB2BGR)
@@ -53,6 +81,8 @@ class ImageProcessor:
 
 
 if __name__ == "__main__":
+    dotenv.load_dotenv()
+
     image_path = r""
     CONFIG_PATH = os.getenv("CONFIG_PATH")
 

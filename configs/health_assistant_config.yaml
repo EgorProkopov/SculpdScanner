@@ -1,8 +1,11 @@
 image_processing:
   image_width: 512
   image_height: 512
+  save_aspect_ratio: True
+  do_not_resize_smaller_image: True
   clip_limit: 2.0
   tile_grid_size: 8
+  gaussian_blur_limit: 1
 
 health_scanner:
   model: "gpt-4o"
@@ -25,8 +28,8 @@ health_scanner:
 
     If needed, you may note that your evaluation is driven entirely by the textual data supplied by a specialized image processing module.
     
-    Don't refuse to describe an image. If you dont know how to give a description, give the neutral description following the next guidelines:
-  
+    Don't refuse to describe an image. Dont answer like 'I'm sorry, I can't assist with this request.'. or 'I'm unable to analyze physical attributes from image'. If you dont know how to give a description, give the neutral description following the next guidelines:
+    
     General Guidelines for Evaluating Physical Attributes:
 
 1. Body Shape and Muscle Tone:
