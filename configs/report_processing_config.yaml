@@ -1,0 +1,24 @@
+health_expert:
+  model: "gpt-4o"
+  expert_prompt_template: "
+You are a health assistant. Given the following report from an image processor and extra user information, 
+produce a JSON object that provides a dense and structured representation of the data.
+
+Report:
+----------------
+{report_text}
+----------------
+
+Extra User Information:
+{user_info}
+
+Your JSON object should include the following keys if applicable:
+- physical_attributes: Detailed description regarding body shape, muscle tone, etc.
+- estimated_body_fat: Estimated body fat percentage details.
+- training_readiness: Readiness score and any related indicators.
+- training_recommendations: Recommendations divided into relevant sections.
+
+Do not return input user information in this json 
+
+Only output valid JSON.
+"

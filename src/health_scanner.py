@@ -8,7 +8,7 @@ from src.image_processor import ImageProcessor
 
 
 class HealthScanner:
-    def __init__(self, API_KEY, scanner_config: DictConfig, image_processor: ImageProcessor):
+    def __init__(self, API_KEY: str, scanner_config: DictConfig, image_processor: ImageProcessor):
         self.scanner_config = scanner_config
         self.image_processor = image_processor
 
@@ -49,4 +49,3 @@ if __name__ == "__main__":
     health_scanner = HealthScanner(API_KEY, config["health_scanner"], image_processor)
 
     print(health_scanner.get_image_description(image_path))
-
