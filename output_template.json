@@ -1,95 +1,45 @@
 {
   "disclaimer": "put your disclaimer here",
   "physical_attributes": {
-    "body_shape": "ectomorph, mesomorph, endomorph and etc",
-    "muscle_tone": "muscular and well-defined or ",
-    "muscle_symmetry": "balanced",
-    "major_muscle_groups": [
-      "shoulders",
-      "chest",
-      "arms",
-      "abdomen"
-    ],
-    "major_muscle_groups_indicators": [
-
-    ],
-    "weak_muscle_groups": [
-
-    ],
-    "weak_muscle_groups_indicators": [
-
-    ]
+    "body_shape": "put_body_shape_here",
+    "muscle_tone": "put_muscle_tone_here",
+    "muscle_symmetry": "e.g., balanced or asymmetrical",
+    "major_muscle_groups": ["e.g., shoulders", "chest"],
+    "major_muscle_groups_indicators": [/* additional details here */],
+    "weak_muscle_groups": [/* if any, otherwise null */],
+    "weak_muscle_groups_indicators": [/* if any, otherwise null */]
   },
   "estimated_body_fat": {
-    "percentage_range": "6-10%",
-    "indicators": [
-      "visible muscle lines",
-      "pronounced abdominal definition",
-      "vascularity"
-    ]
+    "percentage_range": "put_percentage_range_here",
+    "indicators": [/* list of indicators */]
   },
   "training_readiness": {
-    "score": 9,
-    "indicators": [
-      "high energy levels",
-      "strong physical condition"
-    ]
+    "score": put_score_here,
+    "indicators": [/* list of related indicators */]
   },
   "training_recommendations": {
     "body_development": {
       "upper_body": {
-        "chest": [
-          "bench presses",
-          "push-ups"
-        ],
-        "back": [
-          "pull-ups",
-          "rows"
-        ],
-        "shoulders": [
-          "shoulder presses",
-          "lateral raises"
-        ],
-        "arms": [
-          "bicep curls",
-          "triceps dips"
-        ]
+        "chest": [/* recommendations */],
+        "back": [/* recommendations */],
+        "shoulders": [/* recommendations */],
+        "arms": [/* recommendations */]
       },
       "lower_body": {
-        "legs": [
-          "squats",
-          "lunges",
-          "deadlifts"
-        ],
-        "calves": [
-          "calf raises"
-        ]
+        "legs": [/* recommendations */],
+        "calves": [/* recommendations */]
       },
-      "core": [
-        "planks",
-        "crunches",
-        "back extensions"
-      ],
-      "postural_balance": [
-        "face pulls"
-      ]
+      "core": [/* recommendations */],
+      "postural_balance": [/* recommendations */]
     },
     "body_maintenance": {
-      "upper_body": {
-
-      },
-      "lower_body": {
-
-      },
-      "core": {
-
-      },
-      "postural_balance": {
-
-      }
+      "upper_body": { /* suggestions */ },
+      "lower_body": { /* suggestions */ },
+      "core": { /* suggestions */ },
+      "postural_balance": { /* suggestions */ }
     },
     "fat_loosing": {
-        "cardiovascular": {}
+      "cardiovascular": { /* suggestions */ }
     }
   }
 }

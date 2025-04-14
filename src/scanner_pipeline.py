@@ -14,7 +14,8 @@ class ScannerPipeline:
 
     def run(self, image_path: str, user_info: dict):
         scanner_report = self.scanner.get_image_description(image_path)
-        output = report_processing_expert.process_report_to_json_string(scanner_report, user_info)
+        print(scanner_report)
+        output = self.report_processing_expert.process_report_to_json_string(scanner_report, user_info)
 
         return output
 

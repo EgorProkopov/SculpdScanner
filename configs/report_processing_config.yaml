@@ -21,4 +21,138 @@ Your JSON object should include the following keys if applicable:
 Do not return input user information in this json 
 
 Only output valid JSON.
+
+
+Expected JSON output:
+{{
+  // 'disclaimer': A string that provides a disclaimer, clarifying that the analysis is based solely on provided data and is for simulation purposes only.
+  'disclaimer': 'put your disclaimer here',
+  
+  // 'physical_attributes': An object containing details about the individual's physical features.
+  'physical_attributes': {{
+    // 'body_shape': A description of the overall body shape (e.g., ectomorph, mesomorph, endomorph, apple-shaped, pear-shaped).
+    'body_shape': put_body_shape_here,
+    
+    // 'muscle_tone': Describes how defined or toned the muscles appear (e.g., muscular and well-defined, soft).
+    'muscle_tone': put_muscle_tone_here,
+    
+    // 'muscle_symmetry': Indicates whether muscle groups are balanced or show asymmetry.
+    'muscle_symmetry': // For example could be 'balanced' or 'asymmetry',
+    
+    // 'major_muscle_groups': An array listing the primary muscle groups identified during analysis.
+    'major_muscle_groups': [
+      // For example, 'shoulders', 'chest' could be included here.
+    ],
+    
+    // 'major_muscle_groups_indicators': An array detailing observed characteristics for major muscle groups (e.g., 'good definition', 'visible striations').
+    'major_muscle_groups_indicators': [
+      // Additional indicators for major muscle groups can be added here.
+    ],
+    
+    // 'weak_muscle_groups': An array listing muscle groups identified as underdeveloped or weak.
+    'weak_muscle_groups': [
+      // For example, 'legs', 'calves' could be included here.
+    ],
+    
+    // 'weak_muscle_groups_indicators': An array describing the indicators that suggest certain muscle groups are weak (e.g., 'lack of definition', 'visible imbalances').
+    'weak_muscle_groups_indicators': [
+      // Additional indicators for weak muscle groups can be added here.
+    ]
+  }},
+  
+  // 'estimated_body_fat': An object to estimate the percentage range of body fat along with supporting visual indicators.
+  'estimated_body_fat': {{
+    // 'percentage_range': A string representing the estimated body fat percentage range (e.g., '6-10%').
+    'percentage_range': put_percentage_range_here,
+    
+    // 'indicators': An array of visual cues used to arrive at the body fat estimation (e.g., 'visible muscle lines', 'pronounced abdominal definition', 'vascularity').
+    'indicators': [
+
+    ]
+  }},
+  
+  // 'training_readiness': An object assessing the individual's overall readiness for training with a score and the supporting indicators.
+  'training_readiness': {{
+    // 'score': A numerical value (for example, on a scale from 1 to 10) representing training readiness.
+    'score': put_score_here,
+    
+    // 'indicators': An array of factors that contribute to the training readiness evaluation (e.g., 'high energy levels', 'strong physical condition').
+    'indicators': [
+
+    ]
+  }},
+  
+  // 'training_recommendations': An object providing targeted training advice, organized by the goal or area of focus.
+  'training_recommendations': {{
+    // 'body_development': Recommendations intended for increasing muscle mass and strength.
+    'body_development': {{
+      // 'upper_body': Recommendations for the upper body.
+      'upper_body': {{
+        // 'chest': A list of exercises designed to develop the chest muscles.
+        'chest': [
+
+        ],
+        // 'back': A list of exercises designed to develop the back muscles.
+        'back': [
+
+        ],
+        // 'shoulders': A list of exercises designed to develop the shoulder muscles.
+        'shoulders': [
+
+        ],
+        // 'arms': A list of exercises designed to develop the arm muscles (biceps and triceps).
+        'arms': [
+
+        ]
+      }},
+      // 'lower_body': Recommendations for the lower body.
+      'lower_body': {{
+        // 'legs': A list of compound exercises for developing leg muscles (quadriceps, hamstrings, glutes).
+        'legs': [
+
+        ],
+        // 'calves': A list of exercises specifically for strengthening the calf muscles.
+        'calves': [
+        ]
+      }},
+      // 'core': A list of exercises to strengthen the core, including the abdomen and lower back.
+      'core': [
+
+      ],
+      // 'postural_balance': A list of exercises aimed at improving posture and overall muscle balance.
+      'postural_balance': [
+
+      ]
+    }},
+    
+    // 'body_maintenance': Recommendations focused on maintaining the current level of physical fitness without aiming for significant muscle hypertrophy.
+    'body_maintenance': {{
+      // 'upper_body': Exercises for maintaining upper body fitness.
+      'upper_body': {{
+        // Additional exercises or suggestions can be added here.
+      }},
+      // 'lower_body': Exercises for maintaining lower body fitness.
+      'lower_body': {{
+        // Additional exercises or suggestions can be added here.
+      }},
+      // 'core': Exercises for maintaining core strength.
+      'core': {{
+        // Additional exercises or suggestions can be added here.
+      }},
+      // 'postural_balance': Exercises for maintaining postural balance.
+      'postural_balance': {{
+        // Additional exercises or suggestions can be added here.
+      }}
+    }},
+    
+    // 'fat_loosing': Recommendations for reducing body fat, primarily through cardiovascular training.
+    'fat_loosing': {{
+      // 'cardiovascular': Exercises that focus on cardio training (e.g., running, cycling, HIIT, brisk walking).
+      'cardiovascular': [
+        // Recommend fat-loosing exercises if person has high body fat percentage
+      ]
+    }}
+  }}
+}}
+
 "
