@@ -39,7 +39,12 @@ class HealthScanner:
 if __name__ == "__main__":
     dotenv.load_dotenv()
 
-    image_path = r"F:\SCULPD\SculpdScanner\data\test_images\normal_images\20-24_percents.jpg"
+    # image_path = r"F:\SCULPD\SculpdScanner\data\test_images\normal_images\5-9_percents.jpg"
+    image_path = r"F:\SCULPD\SculpdScanner\data\test_images\normal_images\10-14_percents_1.jpeg"
+    # image_path = r"F:\SCULPD\SculpdScanner\data\test_images\normal_images\15-19_percents.jpg"
+    # image_path = r"F:\SCULPD\SculpdScanner\data\test_images\normal_images\20-24_percents.jpg"
+    # image_path = r"F:\SCULPD\SculpdScanner\data\test_images\normal_images\25-29_percents.jpg"
+    # image_path = r"F:\SCULPD\SculpdScanner\data\test_images\normal_images\30-34_percents.jpg"
 
     SCANNER_CONFIG_PATH = os.getenv("SCANNER_CONFIG_PATH")
     API_KEY = os.getenv("API_KEY")

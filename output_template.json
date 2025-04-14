@@ -1,0 +1,95 @@
+{
+  "disclaimer": "put your disclaimer here",
+  "physical_attributes": {
+    "body_shape": "ectomorph, mesomorph, endomorph and etc",
+    "muscle_tone": "muscular and well-defined or ",
+    "muscle_symmetry": "balanced",
+    "major_muscle_groups": [
+      "shoulders",
+      "chest",
+      "arms",
+      "abdomen"
+    ],
+    "major_muscle_groups_indicators": [
+
+    ],
+    "weak_muscle_groups": [
+
+    ],
+    "weak_muscle_groups_indicators": [
+
+    ]
+  },
+  "estimated_body_fat": {
+    "percentage_range": "6-10%",
+    "indicators": [
+      "visible muscle lines",
+      "pronounced abdominal definition",
+      "vascularity"
+    ]
+  },
+  "training_readiness": {
+    "score": 9,
+    "indicators": [
+      "high energy levels",
+      "strong physical condition"
+    ]
+  },
+  "training_recommendations": {
+    "body_development": {
+      "upper_body": {
+        "chest": [
+          "bench presses",
+          "push-ups"
+        ],
+        "back": [
+          "pull-ups",
+          "rows"
+        ],
+        "shoulders": [
+          "shoulder presses",
+          "lateral raises"
+        ],
+        "arms": [
+          "bicep curls",
+          "triceps dips"
+        ]
+      },
+      "lower_body": {
+        "legs": [
+          "squats",
+          "lunges",
+          "deadlifts"
+        ],
+        "calves": [
+          "calf raises"
+        ]
+      },
+      "core": [
+        "planks",
+        "crunches",
+        "back extensions"
+      ],
+      "postural_balance": [
+        "face pulls"
+      ]
+    },
+    "body_maintenance": {
+      "upper_body": {
+
+      },
+      "lower_body": {
+
+      },
+      "core": {
+
+      },
+      "postural_balance": {
+
+      }
+    },
+    "fat_loosing": {
+        "cardiovascular": {}
+    }
+  }
+}
