@@ -25,7 +25,13 @@ def get_training_recommendation(image_path: str, user_info: dict):
         report_processing_config=report_processing_config
     )
 
-    scanner_pipeline = ScannerPipeline(scanner=health_scanner, report_processing_expert=report_processing_expert)
+    max_attempts = report_processing_config["max_attempts"]
+
+    scanner_pipeline = ScannerPipeline(
+        scanner=health_scanner,
+        report_processing_expert=report_processing_expert,
+        max_attempts=max_attempts
+    )
 
     output = scanner_pipeline.run(image_path=image_path, user_info=user_info)
     print(output)

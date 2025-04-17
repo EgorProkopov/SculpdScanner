@@ -1,5 +1,6 @@
 health_expert:
   model: "gpt-4o"
+  max_attempts: 6
   expert_prompt_template: "
 You are a health assistant. Given the following report from an image processor and extra user information, 
 produce a JSON object that provides a dense and structured representation of the data.
@@ -62,7 +63,7 @@ Expected JSON output:
   
   // 'estimated_body_fat': An object to estimate the percentage range of body fat along with supporting visual indicators.
   'estimated_body_fat': {{
-    // 'percentage_range': A string representing the estimated body fat percentage range (e.g., '6-10%').
+    // 'percentage_range': A string representing the estimated body fat percentage range (e.g., '6-10%'). Should return number or numbers, not a text description.
     'percentage_range': put_percentage_range_here,
     
     // 'indicators': An array of visual cues used to arrive at the body fat estimation (e.g., 'visible muscle lines', 'pronounced abdominal definition', 'vascularity').
@@ -129,15 +130,38 @@ Expected JSON output:
     'body_maintenance': {{
       // 'upper_body': Exercises for maintaining upper body fitness.
       'upper_body': {{
-        // Additional exercises or suggestions can be added here.
+              
+        // 'chest': A list of exercises designed to develop the chest muscles.
+        'chest': [
+
+        ],
+        // 'back': A list of exercises designed to develop the back muscles.
+        'back': [
+
+        ],
+        // 'shoulders': A list of exercises designed to develop the shoulder muscles.
+        'shoulders': [
+
+        ],
+        // 'arms': A list of exercises designed to develop the arm muscles (biceps and triceps).
+        'arms': [
+
+        ]
       }},
       // 'lower_body': Exercises for maintaining lower body fitness.
       'lower_body': {{
-        // Additional exercises or suggestions can be added here.
+        // 'legs': A list of compound exercises for developing leg muscles (quadriceps, hamstrings, glutes).
+        'legs': [
+
+        ],
+        // 'calves': A list of exercises specifically for strengthening the calf muscles.
+        'calves': [
+        ]
       }},
       // 'core': Exercises for maintaining core strength.
       'core': {{
         // Additional exercises or suggestions can be added here.
+        
       }},
       // 'postural_balance': Exercises for maintaining postural balance.
       'postural_balance': {{

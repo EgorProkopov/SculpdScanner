@@ -1,23 +1,54 @@
 import os
 import dotenv
+import logging
 from omegaconf import OmegaConf
 
 from src.image_processor import ImageProcessor
 from src.health_scanner import HealthScanner
 from src.report_processing_expert import ReportProcessingExpert
+from src.logger import get_logger
 
 
 class ScannerPipeline:
-    def __init__(self, scanner: HealthScanner, report_processing_expert: ReportProcessingExpert):
+    def __init__(self, scanner: HealthScanner, report_processing_expert: ReportProcessingExpert, max_attempts: int = 6):
         self.scanner = scanner
         self.report_processing_expert = report_processing_expert
 
-    def run(self, image_path: str, user_info: dict):
-        scanner_report = self.scanner.get_image_description(image_path)
-        print(scanner_report)
-        output = self.report_processing_expert.process_report_to_json_string(scanner_report, user_info)
+        self.max_attempts = max_attempts
 
+        self.logger = get_logger(name=self.__class__.__name__, level=logging.DEBUG)
+
+    def is_valide_report(self, report_text: str) -> bool:
+        unsatisfactory_phrases = [
+            "I'm sorry",
+            "I'm unable",
+            "I can't"
+        ]
+        is_valide_text = not any(phrase in report_text for phrase in unsatisfactory_phrases)
+        is_valide_length = len(report_text) > 200
+        is_valide = is_valide_text or is_valide_length
+        return is_valide
+
+    def run(self, image_path: str, user_info: dict):
+        attempt = 0
+        scanner_report = None
+        while attempt < self.max_attempts:
+            scanner_report = self.scanner.get_image_description(image_path)
+            self.logger.debug(f"Scanner report (attempt {attempt + 1}): {scanner_report}")
+            if self.is_valide_report(scanner_report):
+                self.logger.info(f"The scanner report was accepted on the {attempt + 1} attempt")
+                break
+
+            else:
+                self.logger.warning(f"Invalid report on the {attempt + 1} attempt. Trying again.")
+                attempt += 1
+        else:
+            self.logger.error(f"Maximum number of attempts (max_attempts = {self.max_attempts}) is reached")
+
+        output = self.report_processing_expert.process_report_to_json_string(scanner_report, user_info)
+        self.logger.debug(f"Final processed output: {output}")
         return output
+
 
 
 if __name__ == "__main__":
@@ -40,7 +71,7 @@ if __name__ == "__main__":
 
     scanner_pipeline = ScannerPipeline(scanner=health_scanner, report_processing_expert=report_processing_expert)
 
-    image_path = r"F:\SCULPD\SculpdScanner\data\test_images\normal_images\20-24_percents.jpg"
-    user_info = {"age": 35, "height_cm": 180, "weight_kg": 110}
+    image_path = r"F:\SCULPD\data\bodyfats\35\IMG_3515.jpeg"
+    user_info = {"age": 35, "height_cm": 180, "weight_kg": 60}
 
-    print(scanner_pipeline.run(image_path=image_path, user_info=user_info))
+    scanner_pipeline.run(image_path, user_info)
