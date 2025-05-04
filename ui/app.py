@@ -9,7 +9,7 @@ from src.report_processing_expert import ReportProcessingExpert
 from src.scanner_pipeline import ScannerPipeline
 
 
-def get_training_recommendation(image_path: str, user_info: dict):
+def get_scanner_report(image_path: str, user_info: dict):
     API_KEY = os.getenv("API_KEY")
     SCANNER_CONFIG_PATH = os.getenv("SCANNER_CONFIG_PATH")
     REPORT_PROCESSING_CONFIG_PATH = os.getenv("REPORT_PROCESSING_CONFIG_PATH")
@@ -33,14 +33,14 @@ def get_training_recommendation(image_path: str, user_info: dict):
         max_attempts=max_attempts
     )
 
-    output = scanner_pipeline.run(image_path=image_path, user_info=user_info)
-    print(output)
+    output = scanner_pipeline.run(image_path=image_path, user_info=user_info, is_url=False)
+    # print(output)
     return output
 
 if __name__ == "__main__":
     dotenv.load_dotenv()
     interface = gr.Interface(
-        fn=get_training_recommendation,
+        fn=get_scanner_report,
         inputs=[gr.Image(type="filepath", label="Upload Your Photo"), gr.TextArea(label='user information', placeholder='{"age": 35, "height_cm": 180, "weight_kg": 110}')],
         outputs=gr.Textbox(label="Image Analysis and Training Recommendations"),
         title="SCULPD Health Scanner",

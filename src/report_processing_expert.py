@@ -27,7 +27,7 @@ class ReportProcessingExpert:
         processed_report = result.content.strip()
         return processed_report
 
-    def __convert_processed_report_to_json(self, processed_report):
+    def convert_processed_report_to_json(self, processed_report):
         if processed_report.startswith("```") and processed_report.endswith("```"):
             processed_report = "\n".join(processed_report.splitlines()[1:-1]).strip()
 
@@ -40,7 +40,7 @@ class ReportProcessingExpert:
 
     def process_report(self, report_text: str, user_info: dict) -> dict:
         processed_report = self.process_report_to_json_string(report_text=report_text, user_info=user_info)
-        structured_data = self.__convert_processed_report_to_json(processed_report=processed_report)
+        structured_data = self.convert_processed_report_to_json(processed_report=processed_report)
         return structured_data
 
 
