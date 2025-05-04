@@ -29,11 +29,11 @@ class ScannerPipeline:
         is_valide = is_valide_text or is_valide_length
         return is_valide
 
-    def run(self, image_path: str, user_info: dict):
+    def run(self, image_path: str, user_info: dict, is_url=True):
         attempt = 0
         scanner_report = None
         while attempt < self.max_attempts:
-            scanner_report = self.scanner.get_image_description(image_path)
+            scanner_report = self.scanner.get_image_description(image_path, is_url=is_url)
             self.logger.debug(f"Scanner report (attempt {attempt + 1}): {scanner_report}")
             if self.is_valide_report(scanner_report):
                 self.logger.info(f"The scanner report was accepted on the {attempt + 1} attempt")
@@ -48,7 +48,6 @@ class ScannerPipeline:
         output = self.report_processing_expert.process_report_to_json_string(scanner_report, user_info)
         self.logger.debug(f"Final processed output: {output}")
         return output
-
 
 
 if __name__ == "__main__":

@@ -14,8 +14,11 @@ class HealthScanner:
 
         self.llm = OpenAI(api_key=API_KEY)
 
-    def get_image_description(self, image_path: str) -> str:
-        image = self.image_processor.read_image(image_path)
+    def get_image_description(self, image_path: str, is_url=True) -> str:
+        if is_url:
+            image =self.image_processor.read_image_url(image_path)
+        else:
+            image = self.image_processor.read_image(image_path)
         image_base64 = self.image_processor.process_image(image)
 
         prompt = self.scanner_config["scanner_prompt"]

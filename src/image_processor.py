@@ -1,9 +1,11 @@
 import io
 import os
 import dotenv
+import requests
+import base64
+import numpy as np
 
 import cv2
-import base64
 import albumentations as A
 
 from omegaconf import OmegaConf, DictConfig
@@ -35,6 +37,21 @@ class ImageProcessor:
 
         image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
         return image
+
+    def read_image_url(self, image_url: str, timeout=5.0):
+        resp = requests.get(image_url, timeout=timeout)
+        if resp.status_code != 200:
+            raise ValueError(f"Failed to fetch image, status code = {resp.status_code}")
+
+        buf = np.frombuffer(resp.content, dtype=np.uint8)
+
+        image_bgr = cv2.imdecode(buf, cv2.IMREAD_COLOR)
+        if image_bgr is None:
+            raise ValueError(f"Unable to decode image from URL: {image_url}")
+
+        image_rgb = cv2.cvtColor(image_bgr, cv2.COLOR_BGR2RGB)
+        return image_rgb
+
 
     def resize_image(self, image):
         config_image_width = self.image_processing_config["image_width"]
