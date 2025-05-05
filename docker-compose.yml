@@ -1,0 +1,17 @@
+version: '3.8'
+services:
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+
+    env_file:
+      - .env.docker
+
+    volumes:
+      - ./configs:/app/configs:ro
+
+    ports:
+      - "7777:7777"
+
+    restart: "unless-stopped"
