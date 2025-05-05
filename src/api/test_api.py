@@ -29,4 +29,6 @@ payload = {
 }
 
 resp = requests.post(url, json=payload)
-print(resp)
+print("Status code:", resp.status_code)
+print("Content-Type:", resp.headers.get("Content-Type"))
+print("Body text:", repr(resp.text))

@@ -38,7 +38,7 @@ class ImageProcessor:
         image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
         return image
 
-    def read_image_url(self, image_url: str, timeout=5.0):
+    def read_image_url(self, image_url: str, timeout=10.0):
         resp = requests.get(image_url, timeout=timeout)
         if resp.status_code != 200:
             raise ValueError(f"Failed to fetch image, status code = {resp.status_code}")
@@ -60,13 +60,11 @@ class ImageProcessor:
         save_aspect_ratio = self.image_processing_config["save_aspect_ratio"]
         do_not_resize_smaller_images = self.image_processing_config["do_not_resize_smaller_image"]
 
-        # Check smaller image
         if do_not_resize_smaller_images:
             image_width = image.shape[1]
             if image_width < config_image_width:
                 return image
 
-        # Resize with respect to width-height ratio
         if save_aspect_ratio:
             image_width = image.shape[1]
             image_height = image.shape[0]
@@ -100,13 +98,13 @@ class ImageProcessor:
 if __name__ == "__main__":
     dotenv.load_dotenv()
 
-    image_path = r""
-    CONFIG_PATH = os.getenv("CONFIG_PATH")
+    image_url = r"https://upload.wikimedia.org/wikipedia/commons/thumb/4/47/PNG_transparency_demonstration_1.png/640px-PNG_transparency_demonstration_1.png"
+    CONFIG_PATH = os.getenv("SCANNER_CONFIG_PATH")
 
     image_processing_config = OmegaConf.load(CONFIG_PATH)["image_processing"]
     image_processor = ImageProcessor(image_processing_config)
 
-    image = image_processor.read_image(image_path)
+    image = image_processor.read_image_url(image_url)
     transformed_image = image_processor.transform_image(image)
     image_processor.show_image(transformed_image)
     cv2.waitKey()

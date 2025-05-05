@@ -49,9 +49,9 @@ def generate_scanner_description(request_data: ScannerRequest, request: Request)
             max_attempts=max_attempts
         )
         report = scanner_pipeline.run(image_path=image_url, user_info=user_info, is_url=True)
-        return report
-        # report_json = scanner_pipeline.report_processing_expert.convert_processed_report_to_json(report)
-        # return report_json
+        report_json = report_processing_expert.convert_processed_report_to_json(report)
+        return ScannerResponse(scanner_result=report_json)
+
 
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
