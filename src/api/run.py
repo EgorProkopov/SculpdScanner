@@ -27,4 +27,4 @@ app = FastAPI(title="SCULPD Scanner API", lifespan=lifespan)
 app.include_router(router)
 
 if __name__ == "__main__":
-    uvicorn.run("src.api.run:app", host="0.0.0.0", port=int(os.getenv("PORT", 7777)), reload=True)
+    uvicorn.run("src.api.run:app", host="0.0.0.0", port=int(os.getenv("PORT", 8888)), reload=True)

@@ -12,6 +12,6 @@ services:
       - ./configs:/app/configs:ro
 
     ports:
-      - "7777:7777"
+      - "8888:8888"
 
     restart: "unless-stopped"
