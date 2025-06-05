@@ -37,6 +37,7 @@ def get_scanner_report(image_path: str, user_info: dict):
     # print(output)
     return output
 
+
 if __name__ == "__main__":
     dotenv.load_dotenv()
     interface = gr.Interface(

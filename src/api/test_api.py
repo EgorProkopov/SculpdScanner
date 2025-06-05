@@ -1,8 +1,5 @@
 import requests
 
-# url = "http://localhost:8888/generate_scanner_description"
-url = "https://fe2d-185-121-233-170.ngrok-free.app/generate_scanner_description"
-
 image_url = "https://upload.wikimedia.org/wikipedia/commons/thumb/4/47/PNG_transparency_demonstration_1.png/640px-PNG_transparency_demonstration_1.png"
 
 user_info_json = {
